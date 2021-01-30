@@ -19,11 +19,11 @@
       "dom"
     ],
     "paths": {
-      "echarts": [
-        "dist/echarts"
+      "ngx-dashboard-echarts": [
+        "dist/ngx-dashboard-echarts"
       ],
-      "echarts/*": [
-        "dist/echarts/*"
+      "ngx-dashboard-echarts/*": [
+        "dist/ngx-dashboard-echarts/*"
       ]
     }
   },

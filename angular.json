@@ -3,33 +3,33 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "echarts": {
+    "ngx-dashboard-echarts": {
       "projectType": "library",
-      "root": "projects/echarts",
-      "sourceRoot": "projects/echarts/src",
+      "root": "projects/ngx-dashboard-echarts",
+      "sourceRoot": "projects/ngx-dashboard-echarts/src",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/echarts/tsconfig.lib.json",
-            "project": "projects/echarts/ng-package.json"
+            "tsConfig": "projects/ngx-dashboard-echarts/tsconfig.lib.json",
+            "project": "projects/ngx-dashboard-echarts/ng-package.json"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/echarts/src/test.ts",
-            "tsConfig": "projects/echarts/tsconfig.spec.json",
-            "karmaConfig": "projects/echarts/karma.conf.js"
+            "main": "projects/ngx-dashboard-echarts/src/test.ts",
+            "tsConfig": "projects/ngx-dashboard-echarts/tsconfig.spec.json",
+            "karmaConfig": "projects/ngx-dashboard-echarts/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/echarts/tsconfig.lib.json",
-              "projects/echarts/tsconfig.spec.json"
+              "projects/ngx-dashboard-echarts/tsconfig.lib.json",
+              "projects/ngx-dashboard-echarts/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -38,5 +38,5 @@
         }
       }
     }},
-  "defaultProject": "echarts"
+  "defaultProject": "ngx-dashboard-echarts"
 }

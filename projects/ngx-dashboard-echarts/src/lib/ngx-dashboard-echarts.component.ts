@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'lib-echarts',
+  selector: 'lib-dashboard-echarts',
   template: `
   <style>
     .btn-link {
@@ -90,7 +90,7 @@ import { Component, Input, OnInit } from '@angular/core';
   `,
   styles: []
 })
-export class EchartsComponent implements OnInit {
+export class NgxDashboardEchartsComponent implements OnInit {
 
   @Input()
   chartOptions: any;

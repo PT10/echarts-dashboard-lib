@@ -1,17 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { EchartsComponent } from './echarts.component';
+import { NgxDashboardEchartsComponent } from './ngx-dashboard-echarts.component';
 import { NgxEchartsModule } from 'ngx-echarts';
 
 
 @NgModule({
-  declarations: [EchartsComponent],
+  declarations: [NgxDashboardEchartsComponent],
   imports: [
     CommonModule,
     FormsModule,
     NgxEchartsModule
   ],
-  exports: [EchartsComponent]
+  exports: [NgxDashboardEchartsComponent]
 })
-export class EchartsModule { }
+export class NgxDashboardEchartsModule { }

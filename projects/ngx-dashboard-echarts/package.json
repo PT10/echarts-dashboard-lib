@@ -1,5 +1,5 @@
 {
-  "name": "ngx-dashboard-echarts",
+  "name": "@bolt-analytics/ngx-dashboard-echarts",
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^8.2.14",
@@ -7,5 +7,40 @@
     "bootstrap": "^3.3.7",
     "echarts": "^4.2.0-rc.2",
     "ngx-echarts": "^2.3.1"
-  }
+  },
+  "main": "bundles/ngx-dashboard-echarts.umd.js",
+  "module": "fesm5/ngx-dashboard-echarts.js",
+  "es2015": "fesm2015/ngx-dashboard-echarts.js",
+  "esm5": "esm5/ngx-dashboard-echarts.js",
+  "esm2015": "esm2015/ngx-dashboard-echarts.js",
+  "fesm5": "fesm5/ngx-dashboard-echarts.js",
+  "fesm2015": "fesm2015/ngx-dashboard-echarts.js",
+  "typings": "ngx-dashboard-echarts.d.ts",
+  "metadata": "ngx-dashboard-echarts.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
+  },
+  "description": "This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.14.",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/PT10/echarts-dashboard-lib.git"
+  },
+  "keywords": [
+    "echarts",
+    "ngx-dashboard"
+  ],
+  "author": "Prasad Tendulkar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/PT10/echarts-dashboard-lib/issues"
+  },
+  "homepage": "https://github.com/PT10/echarts-dashboard-lib#readme"
 }
+

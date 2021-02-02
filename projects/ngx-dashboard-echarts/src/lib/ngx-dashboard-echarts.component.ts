@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 
 @Component({
   selector: 'lib-dashboard-echarts',
@@ -13,8 +13,9 @@ import { Component, Input, OnInit } from '@angular/core';
       transform: scale(1.15,1.15);
   }
   </style>
-<span *ngIf="!chartOptions">Chart is not configured</span>
-<div [ngStyle]="editMode ? {'float': 'left', 'width': '80%', 'height': '100%'} : {'width': '100%', 'height': '100%'}">
+  <span *ngIf="!chartOptions">Chart is not configured</span>
+  <div echarts [options]="chartOptions" [ngStyle]="{'height': '100%'}"></div>
+<!-- <div [ngStyle]="editMode ? {'float': 'left', 'width': '80%', 'height': '100%'} : {'width': '100%', 'height': '100%'}">
   <div echarts [options]="chartOptions" [ngStyle]="editMode ? {'height': '50%'} : {'height': '100%'}">
   </div>
   <div *ngIf="editMode" style="height: 50%; border-top: 5px solid darkgrey; color: black; padding: 10px;">
@@ -86,17 +87,22 @@ import { Component, Input, OnInit } from '@angular/core';
       </button>
     </div>
   </div>
-</div>
+</div> -->
   `,
   styles: []
 })
-export class NgxDashboardEchartsComponent implements OnInit {
+export class NgxDashboardEchartsComponent implements OnInit, OnChanges {
 
-  @Input()
+  //@Input()
   chartOptions: any;
 
+  //editMode: boolean
+
   @Input()
-  editMode: boolean
+  seriesData: any[]
+
+  @Input()
+  chartConfig: any;
 
   sourceTypes: any[] = [];
   sources: any[] = [];
@@ -104,6 +110,13 @@ export class NgxDashboardEchartsComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  ngOnChanges() {
+    this.chartOptions = this.chartConfig;
+    this.chartOptions['series'] = this.seriesData;
+
+    this.chartOptions = JSON.parse(JSON.stringify(this.chartOptions));
   }
 
 }

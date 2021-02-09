@@ -5,8 +5,8 @@
     "@angular/common": "^8.2.14",
     "@angular/core": "^8.2.14",
     "bootstrap": "^3.3.7",
-    "echarts": "^4.2.0-rc.2",
-    "ngx-echarts": "^2.3.1"
+    "echarts": "^4.8.0",
+    "ngx-echarts": "^5.2.2"
   },
   "main": "bundles/ngx-dashboard-echarts.umd.js",
   "module": "fesm5/ngx-dashboard-echarts.js",

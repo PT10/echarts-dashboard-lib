@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, DoCheck, Input, IterableDiffers, OnChanges, OnInit } from '@angular/core';
 
 @Component({
   selector: 'lib-dashboard-echarts',
@@ -14,84 +14,11 @@ import { Component, Input, OnChanges, OnInit } from '@angular/core';
   }
   </style>
   <span *ngIf="!chartOptions">Chart is not configured</span>
-  <div echarts [options]="chartOptions" [ngStyle]="{'height': '100%'}"></div>
-<!-- <div [ngStyle]="editMode ? {'float': 'left', 'width': '80%', 'height': '100%'} : {'width': '100%', 'height': '100%'}">
-  <div echarts [options]="chartOptions" [ngStyle]="editMode ? {'height': '50%'} : {'height': '100%'}">
-  </div>
-  <div *ngIf="editMode" style="height: 50%; border-top: 5px solid darkgrey; color: black; padding: 10px;">
-    <br>
-    <div class="row">
-      <div class="col-md-12">
-        <div class="row">
-          <div class="col-md-3">
-            <label for="selectedSourceType">Source Type</label>
-            <select class="custom-select" style="width:98%; height:30px"
-              id="selectedSourceType" name="selectedSourceType" [(ngModel)]="chartOptions.sourceType" required>
-              <option [ngValue]="undefined"></option>
-              <option *ngFor="let sourceType of sourceTypes" [ngValue]="sourceType">{{sourceType}}</option>
-            </select>
-          </div>
-          <div class="col-md-3">
-            <label for="selectedSource">Input Source</label>
-            <select class="custom-select" style="width:98%; height:30px"
-                id="selectedSource" name="selectedSource" [disabled]="!chartOptions.sourceType"
-                      [(ngModel)]="chartOptions.source" required>
-              <option [ngValue]="undefined"></option>
-              <ng-container *ngIf="chartOptions.sourceType">
-                <ng-container *ngFor="let source of sources[chartOptions.sourceType]">
-                  <option [ngValue]="source">{{source}}</option>
-                </ng-container>
-              </ng-container>
-            </select>
-          </div>
-        </div><br>
-        <div class="row">
-          <div class="col-md-6">
-            <label for="searchQuery">Search Query</label>
-            <textarea [(ngModel)]="chartOptions.searchQuery"
-              style="height:100px; max-height: 200px;" class="form-control input-sm" id="searchQuerySearch"
-              name="searchQuerySearch" required></textarea>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-<div *ngIf="editMode" style="float: left; width: 20%; height: 100%; border-left: 5px solid darkgrey; padding: 20px">
-  <div class="row">
-    <div class="col-md-12 text-center" style="border-bottom: 1px solid grey; padding-bottom: 20px;">
-      <span style="color: black; font-weight: bold; font-size: 20px;">Visualizations</span>
-    </div>
-  </div> <br> <br>
-  <div class="row">
-    <div class="col-md-6">
-      <button class="btn btn-link">
-        <span class="fa fa-pie-chart fa-5x"></span>
-    </button>
-    </div>
-    <div class="col-md-6">
-      <button class="btn btn-link">
-        <span class="fa fa-bar-chart fa-5x"></span>
-      </button>
-    </div>
-  </div> <br> <br>
-  <div class="row">
-    <div class="col-md-6">
-      <button class="btn btn-link">
-        <span class="fa fa-line-chart fa-5x"></span>
-      </button>
-    </div>
-    <div class="col-md-6">
-      <button class="btn btn-link">
-        <span class="fa fa-area-chart fa-5x"></span>
-      </button>
-    </div>
-  </div>
-</div> -->
+  <div echarts [options]="chartOptions"  [ngStyle]="{'height': '100%'}" (chartInit)="onChartInit($event)"></div>
   `,
   styles: []
 })
-export class NgxDashboardEchartsComponent implements OnInit, OnChanges {
+export class NgxDashboardEchartsComponent implements OnInit, OnChanges, DoCheck {
 
   //@Input()
   chartOptions: any;
@@ -99,7 +26,7 @@ export class NgxDashboardEchartsComponent implements OnInit, OnChanges {
   //editMode: boolean
 
   @Input()
-  seriesData: any[]
+  dataset: any[]
 
   @Input()
   chartConfig: any;
@@ -107,16 +34,37 @@ export class NgxDashboardEchartsComponent implements OnInit, OnChanges {
   sourceTypes: any[] = [];
   sources: any[] = [];
 
-  constructor() { }
+  echartsObj: any;
+  iterableDiffer: any;
+
+  constructor(private iterableDiffers: IterableDiffers) {
+    this.iterableDiffer = this.iterableDiffers.find([]).create(null);
+   }
 
   ngOnInit() {
   }
 
+  ngDoCheck() {
+    if (!this.echartsObj || !this.chartOptions || !this.chartOptions.dataset || !this.chartOptions.dataset.source) {
+      return;
+    }
+    let changes = this.iterableDiffer.diff(this.chartOptions.dataset.source);
+    if (changes) {
+      this.echartsObj.setOption({
+        dataset: {
+          source: this.chartOptions.dataset.source
+        }
+      })
+    }
+  }
+
   ngOnChanges() {
     this.chartOptions = this.chartConfig;
-    this.chartOptions['series'] = this.seriesData;
+    this.chartOptions['dataset'] = this.dataset;
+  }
 
-    this.chartOptions = JSON.parse(JSON.stringify(this.chartOptions));
+  onChartInit(ec: any) {
+    this.echartsObj = ec;
   }
 
 }

@@ -36,12 +36,14 @@ export class NgxDashboardEchartsComponent implements OnInit, OnChanges, DoCheck 
 
   echartsObj: any;
   iterableDiffer: any;
+  markedForChange = false;
 
   constructor(private iterableDiffers: IterableDiffers) {
     this.iterableDiffer = this.iterableDiffers.find([]).create(null);
    }
 
   ngOnInit() {
+    this.setOption();
   }
 
   ngDoCheck() {
@@ -50,12 +52,27 @@ export class NgxDashboardEchartsComponent implements OnInit, OnChanges, DoCheck 
     }
     let changes = this.iterableDiffer.diff(this.chartOptions.dataset.source);
     if (changes) {
-      this.echartsObj.setOption({
-        dataset: {
-          source: this.chartOptions.dataset.source
-        }
-      })
+      this.markedForChange = true;
+      // this.echartsObj.setOption({
+      //   dataset: {
+      //     source: this.chartOptions.dataset.source
+      //   }
+      // })
     }
+  }
+
+  setOption() {
+    setInterval(() => {
+      if (this.markedForChange) {
+        this.echartsObj.setOption({
+          dataset: {
+            source: this.chartOptions.dataset.source
+          }
+        });
+
+        this.markedForChange = false;
+      }
+    }, 1000)
   }
 
   ngOnChanges() {

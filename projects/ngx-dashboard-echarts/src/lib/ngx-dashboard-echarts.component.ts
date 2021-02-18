@@ -65,6 +65,7 @@ export class NgxDashboardEchartsComponent implements OnInit, OnChanges, DoCheck 
     setInterval(() => {
       if (this.markedForChange) {
         this.echartsObj.setOption({
+          title: {show: false},
           dataset: {
             source: this.chartOptions.dataset.source
           }

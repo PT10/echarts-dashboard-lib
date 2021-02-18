@@ -82,6 +82,18 @@ export class NgxDashboardEchartsComponent implements OnInit, OnChanges, DoCheck 
 
   onChartInit(ec: any) {
     this.echartsObj = ec;
+    setTimeout(() => {
+      this.echartsObj.setOption({title: {
+        show: this.chartOptions.dataset.source.length === 0,
+        textStyle: {
+            color: "black",
+            fontSize: 14
+        },
+        text: "No data",
+        left: "center",
+        top: "center"
+      }})
+    }, 200)
   }
 
 }

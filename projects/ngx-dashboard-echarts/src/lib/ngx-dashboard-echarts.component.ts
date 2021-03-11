@@ -64,8 +64,12 @@ export class NgxDashboardEchartsComponent implements OnInit, OnChanges, DoCheck 
   setOption() {
     setInterval(() => {
       if (this.markedForChange) {
+        let noData = this.chartOptions.dataset.source.length === 0;
+        if (this.chartOptions.dataset.source.length === 1) {
+          noData = Object.keys(this.chartOptions.dataset.source[0]).length === 0;
+        }
         this.echartsObj.setOption({
-          title: {show: false},
+          title: {show: noData, text: noData ? 'No Data' : ''},
           dataset: {
             source: this.chartOptions.dataset.source
           }
@@ -90,7 +94,7 @@ export class NgxDashboardEchartsComponent implements OnInit, OnChanges, DoCheck 
             color: "black",
             fontSize: 14
         },
-        text: "No data",
+        text: "Loading..",
         left: "center",
         top: "center"
       }})

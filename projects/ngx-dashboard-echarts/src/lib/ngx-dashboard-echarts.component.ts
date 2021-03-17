@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, DoCheck, Input, IterableDiffers, OnChanges, OnInit } from '@angular/core';
+import { Component, DoCheck, Input, IterableDiffers, OnChanges, OnInit } from '@angular/core';
 
 @Component({
   selector: 'lib-dashboard-echarts',
@@ -97,7 +97,11 @@ export class NgxDashboardEchartsComponent implements OnInit, OnChanges, DoCheck 
         text: "Loading..",
         left: "center",
         top: "center"
-      }})
+      }});
+
+      this.echartsObj.on('datazoom', (params) => {
+        console.log(params);
+      })
     }, 200)
   }
 
